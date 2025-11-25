@@ -1,5 +1,7 @@
 import type { Equal, Expect } from '@type-challenges/utils'
 
+type First<T extends any[]> = T extends [infer F, ...infer _] ? F : never
+
 type cases = [
   Expect<Equal<First<[3, 2, 1]>, 3>>,
   Expect<Equal<First<[() => 123, { a: string }]>, () => 123>>,
