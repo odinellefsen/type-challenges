@@ -1,6 +1,6 @@
 import type { Equal, Expect } from '@type-challenges/utils'
 
-type First<T extends any[]> = T extends [infer F, ...infer _] ? F : never
+type First<T extends readonly any[]> = T extends [infer F, ...infer _] ? F : never
 
 type cases = [
   Expect<Equal<First<[3, 2, 1]>, 3>>,
@@ -15,3 +15,14 @@ type errors = [
   // @ts-expect-error
   First<{ 0: 'arrayLike' }>,
 ]
+
+const buttons = ['start', 'stop', 'reset'] as const
+
+type Button = typeof buttons[number]
+
+const Mode = {
+  Dark: 'dark',
+  Light: 'light',
+} as const
+
+type t = typeof Mode[keyof typeof Mode]
